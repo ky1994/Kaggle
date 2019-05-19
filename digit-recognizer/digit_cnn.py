@@ -23,6 +23,9 @@ sns.set(style='white', context='notebook', palette='deep')
 -Hello world of Deep learning
 -MNIST ("Modified National Institute of Standards and Technology")，计算机视觉新手村
 -（28pi*28pi=）包含784个像素点的28*28的像素矩阵，每个点是0-255的整数，表示灰度，数字越大越暗
+-score 0.97642
+-epochs = 1 ,score = 0.97642
+-epochs = 10,score = 0.99200 
 
 
 -像素矩阵和csv列对应关系
@@ -92,8 +95,11 @@ def model_cnn():
                                                 patience=3,
                                                 verbose=1,
                                                 factor=0.5,
+
                                                 min_lr=0.00001)
-    epochs = 1  # Turn epochs to 30 to get 0.9967 accuracy
+    # epochs=1 ,- 340s - loss: 0.4151 - acc: 0.8693 - val_loss: 0.0748 - val_acc: 0.9779
+    # epochs=10,- 309s - loss: 0.0633 - acc: 0.9823 - val_loss: 0.0222 - val_acc: 0.9945
+    epochs = 1
     batch_size = 86
 
     datagen = ImageDataGenerator(
@@ -116,8 +122,7 @@ def model_cnn():
                                   verbose=2, steps_per_epoch=X_train.shape[0] // batch_size
                                   , callbacks=[learning_rate_reduction])
 
-    # -将近6min
-    # -340s - loss: 0.4151 - acc: 0.8693 - val_loss: 0.0748 - val_acc: 0.9779
+
     return model
 
 
@@ -149,7 +154,7 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
 
-    plt.savefig('./output/matrix.png')
+    plt.savefig('./output_cnn/matrix.png')
     plt.show()
 
 
@@ -169,7 +174,7 @@ def display_errors(errors_index, img_errors, pred_errors, obs_errors):
             ax[row, col].set_title("Predicted label :{}\nTrue label :{}".format(pred_errors[error], obs_errors[error]))
             n += 1
 
-    plt.savefig('./output/errors.png')
+    plt.savefig('./output_cnn/errors.png')
     plt.show()
 
 
@@ -211,7 +216,7 @@ def predict():
     results = np.argmax(results, axis=1)
     results = pd.Series(results, name="Label")
     submission = pd.concat([pd.Series(range(1, 28001), name="ImageId"), results], axis=1)
-    submission.to_csv("./output/mnist_cnn.csv", index=False)
+    submission.to_csv("./output_cnn/mnist_cnn.csv", index=False)
 
 
 if __name__ == "__main__":
