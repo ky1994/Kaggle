@@ -1,0 +1,10 @@
+2019-05-12 18:43:05.861004 digit-recongizer begin
+2019-05-12 18:43:09.434510 model begin
+Epoch 1/1
+2019-05-12 18:43:10.537447: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+ - 306s - loss: 0.4166 - acc: 0.8679 - val_loss: 0.0808 - val_acc: 0.9726
+2019-05-12 18:48:16.955573 error begin
+2019-05-12 18:48:25.481250 matrix begin
+2019-05-12 18:48:26.292335 display_errors begin
+2019-05-12 18:48:27.402511 predict begin
+2019-05-12 18:49:28.578289 digit-recongizer end
